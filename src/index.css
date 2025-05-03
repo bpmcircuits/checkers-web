@@ -1,0 +1,156 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  margin-top: 2rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.board-wrapper {
+  display: inline-grid;
+  grid-template-areas: 
+    "empty-1 top empty-2"
+    "left board right"
+    "empty-3 bottom empty-4";
+  gap: 8px;
+  margin: 0 auto;
+}
+
+.coordinates-top {
+  grid-area: top;
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  justify-items: center;
+  align-items: center;
+}
+
+.coordinates-bottom {
+  grid-area: bottom;
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  justify-items: center;
+  align-items: center;
+}
+
+.coordinates-left {
+  grid-area: left;
+  display: grid;
+  grid-template-rows: repeat(8, 60px);
+  justify-items: center;
+  align-items: center;
+}
+
+.coordinates-right {
+  grid-area: right;
+  display: grid;
+  grid-template-rows: repeat(8, 60px);
+  justify-items: center;
+  align-items: center;
+}
+
+.checkers-board {
+  grid-area: board;
+  display: grid;
+  grid-template-columns: repeat(8, 60px);
+  grid-template-rows: repeat(8, 60px);
+  gap: 1px;
+  padding: 0px;  /* Dodajemy padding aby border był widoczny */
+  border: 4px solid #161c27;
+  background-color: #374151; /* Kolor szczelin między polami */
+}
+
+.checkers-cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #161c27;
+}
+
+.coordinate-label {
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: 500;
+}
