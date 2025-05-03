@@ -14,11 +14,14 @@ interface Row {
 }
 
 interface GameState {
-  gameId: string;
-  rows: Row[];
-  playerOne: string;
-  playerTwo: string;
-  currentPlayer: string;
+    gameId: string;
+    rows: Row[];
+    playerOne: string;
+    playerTwo: string;
+    currentPlayer: string;
+    capturedWhiteFigures: string[];
+    capturedBlackFigures: string[];
+    winner: string; 
 }
 
 interface Props {
@@ -109,11 +112,37 @@ const CheckersBoard: React.FC<Props> = ({ gameId }) => {
 
   return (
     <div className="p-4 space-y-4">
-      <div className="text-xl font-semibold text-center">
-        <p>Gracz 1: {game.playerOne}</p>
-        <p>Gracz 2: {game.playerTwo}</p>
-        <p className="mt-2 text-green-600">Ruch: {game.currentPlayer}</p>
-      </div>
+        <div className="text-xl font-semibold text-center">
+            {game.winner ? (
+                <div className="bg-green-100 text-green-800 p-4 rounded-lg mb-4 text-2xl">
+                    🏆 Wygrywa: {game.winner}!
+                </div>
+            ) : (
+                <>
+                    <div className="flex justify-between items-center mb-2">
+                        <p>Gracz 1: {game.playerOne}</p>
+                        <p className="text-red-500">
+                            Zdobyte pionki: <span className="text-lg">
+                                {game.capturedBlackFigures.map((piece, index) => (
+                                    <span key={index} className="mx-0.5">○</span>
+                                ))}
+                            </span>
+                        </p>
+                    </div>
+                    <div className="flex justify-between items-center mb-2">
+                        <p>Gracz 2: {game.playerTwo}</p>
+                        <p className="text-red-500">
+                            Zdobyte pionki: <span className="text-lg">
+                                {game.capturedWhiteFigures.map((piece, index) => (
+                                    <span key={index} className="mx-0.5">●</span>
+                                ))}
+                            </span>
+                        </p>
+                    </div>
+                    <p className="mt-2 text-green-600">Ruch: {game.currentPlayer}</p>
+                </>
+            )}
+        </div>
   
       <div className="board-wrapper">
         {/* Top coordinates (A-H) */}
