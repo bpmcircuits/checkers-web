@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+});
+
 type PieceType = "PAWN" | "QUEEN" | "NONE";
 type Color = "WHITE" | "BLACK" | null;
 
@@ -41,7 +49,7 @@ const CheckersBoard: React.FC<Props> = ({ gameId }) => {
   }, []);
 
   const fetchGame = async () => {
-    const res = await axios.get(`/api/checkers/game/${gameId}`);
+    const res = await api.get(`/checkers/game/${gameId}`);
     setGame(res.data);
   };
 
@@ -64,7 +72,7 @@ const CheckersBoard: React.FC<Props> = ({ gameId }) => {
       console.log("Move:", move);
 
       try {
-        const res = await axios.post(`/api/checkers/game/${gameId}/move`, move);
+        const res = await api.post(`/checkers/game/${gameId}/move`, move);
         setGame(res.data);
         setSelected(null);
       } catch (error) {

@@ -2,6 +2,14 @@ import React, { useState, useEffect } from "react";
 import CheckersBoard from "./CheckersBoard";
 import axios from "axios";
 
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+});
+
 function App() {
   const [gameId, setGameId] = useState<string | null>(() => {
     // Odczytuj gameId z localStorage (przy odświeżeniu strony)
@@ -24,7 +32,7 @@ function App() {
     if (!players.playerOne || !players.playerTwo) return;
 
     try {
-      const res = await axios.post("/api/checkers/game", {
+      const res = await api.post("/checkers/game", {
         playerOne: players.playerOne,
         playerTwo: players.playerTwo,
       });
